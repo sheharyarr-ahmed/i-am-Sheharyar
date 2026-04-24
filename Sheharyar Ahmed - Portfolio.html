@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sheharyar Ahmed</title>
+<meta name="description" content="Sheharyar Ahmed — building systems that execute work: autonomous agents, full-stack products, and native iOS." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #8a8a8a;
+    --fg-dim: #5a5a5a;
+    --fg-faint: #3a3a3a;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  .hero-root {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bg);
+  }
+  .hero-root.route-home { height: 100vh; overflow: hidden; }
+  .hero-root.route-about { min-height: 100vh; height: 100vh; overflow: hidden; }
+
+  .reveal-content {
+    height: 100%;
+  }
+
+  .hero-main {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding: 0 6vw;
+    padding-bottom: 14vh;
+  }
+
+  .hero-block {
+    width: 100%;
+    max-width: 420px;
+    text-align: left;
+    color: #3f3f47;
+    font-size: 12px;
+  }
+
+  .hero-block .line {
+    margin: 0 0 0.9em 0;
+    font-size: 14px;
+    line-height: 1.55;
+    text-wrap: pretty;
+    color: #3f3f47;
+  }
+  .hero-block .line:last-child { margin-bottom: 0; }
+
+  .hero-block .name {
+    color: #e4e4e7;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  .hero-block .mono-accent {
+    color: #3f3f47;
+    transition: color 160ms ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .hero-block .mono-accent:hover {
+    color: #71717a;
+  }
+  .hero-block .link {
+    color: #e4e4e7;
+    text-decoration: none;
+    font-style: italic;
+    transition: color 160ms ease;
+  }
+  .hero-block .link:hover {
+    color: #71717a;
+  }
+
+  .hero-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.3em;
+    flex-wrap: wrap;
+    padding: 0 6vw;
+    font-size: 12px;
+    color: #3f3f47;
+  }
+  .nav-wrap {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 7vh;
+    z-index: 3;
+  }
+  .nav-item {
+    color: #3f3f47;
+    text-decoration: none;
+    transition: color 160ms ease;
+    letter-spacing: 0.01em;
+  }
+  .nav-item:hover {
+    color: #71717a;
+  }
+
+  /* ---------- About page ---------- */
+  .about-main {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    padding: 0 6vw;
+    display: grid;
+    place-items: center;
+  }
+  .about-block {
+    width: 100%;
+    max-width: 420px;
+    text-align: left;
+  }
+  .about-block .section-title {
+    color: #e4e4e7;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0;
+    margin: 1.3em 0 0.45em 0;
+    line-height: 1.3;
+  }
+  .about-block .section-title:first-child {
+    margin-top: 0;
+  }
+  .about-block .para {
+    margin: 0 0 0.5em 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #3f3f47;
+    text-wrap: pretty;
+  }
+  .about-block .bold {
+    color: #3f3f47;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .hero-block .line { font-size: 11px; }
+    .about-block .para { font-size: 11px; }
+    .about-block .section-title { font-size: 11px; }
+    .hero-nav { gap: 0.8em; font-size: 11px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-root { filter: none !important; opacity: 1 !important; }
+    .hero-main { opacity: 1 !important; }
+    .about-main { opacity: 1 !important; }
+    .reveal-content, .nav-wrap {
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="hero-root route-home" id="root">
+  <div class="reveal-content" id="viewWrap">
+    <main id="view"></main>
+  </div>
+  <div class="nav-wrap" id="navWrap">
+    <nav class="hero-nav" id="nav"></nav>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var REVEAL_MS = 4500;
+  var FEATHER = 18;
+
+  // Slow-emerge easing: lingers in darkness, then accelerates into focus.
+  function slowEmerge(t) {
+    if (t < 0.5) return 2 * t * t * t;
+    return 1 - Math.pow(-2 * t + 2, 2.4) / 2;
+  }
+
+  function homeHTML() {
+    return (
+      '<div class="hero-block">' +
+        '<p class="line">' +
+          'i am <span class="name">SHEHARYAR AHMED</span>.' +
+        '</p>' +
+        '<p class="line">' +
+          'i build systems that execute work — autonomous agents, ' +
+          'full-stack products, and native iOS.' +
+        '</p>' +
+        '<p class="line">' +
+          'i ship most of my work ' +
+          '<a href="https://github.com/sheharyarr-ahmed" target="_blank" rel="noopener noreferrer" class="link">here</a>' +
+          ' and ' +
+          '<a href="https://www.linkedin.com/in/sheharyar-ahmed-89598b226/" target="_blank" rel="noopener noreferrer" class="link">here</a>.' +
+        '</p>' +
+        '<p class="line">' +
+          'reach out at ' +
+          '<a href="mailto:sheryahmedme1@gmail.com" class="mono-accent">sheryahmedme1@gmail.com</a>' +
+          '; i like hearing from people building things that matter.' +
+        '</p>' +
+      '</div>'
+    );
+  }
+
+  function aboutHTML() {
+    return (
+      '<div class="about-block">' +
+        '<h2 class="section-title">Now</h2>' +
+        '<p class="para">' +
+          'Founding <span class="bold">SheryLabs</span> — a small studio for founders who have outgrown traditional SaaS. ' +
+          'Most of what I do there is solo-architect engagements across agentic AI, modern full-stack, and native iOS.' +
+        '</p>' +
+        '<p class="para">' +
+          'Completing an <span class="bold">MS in Software Engineering</span> @ NUST, Islamabad.' +
+        '</p>' +
+        '<p class="para">' +
+          'Available for selected engagements in the <span class="bold">$2K–$10K+</span> range.' +
+        '</p>' +
+
+        '<h2 class="section-title">Interests</h2>' +
+        '<p class="para">' +
+          'The shift from SaaS to autonomous software — systems that execute work rather than display it.' +
+        '</p>' +
+        '<p class="para">' +
+          'Agentic architecture — how to give agents enough structure to be reliable without eliminating their flexibility.' +
+        '</p>' +
+        '<p class="para">' +
+          'Native iOS as craft — why Apple-platform engineering still matters in a cross-platform world.' +
+        '</p>' +
+        '<p class="para">' +
+          'The economics of solo senior engineering — what one person can ship when given the right leverage.' +
+        '</p>' +
+
+        '<h2 class="section-title">Background</h2>' +
+        '<p class="para">' +
+          '<span class="bold">BS in Software Engineering</span>, SZABIST (2024). ' +
+          'Continued self-directed study in modern full-stack, agentic systems, and Apple-platform engineering. Remote / Global.' +
+        '</p>' +
+      '</div>'
+    );
+  }
+
+  function homeNavHTML() {
+    return (
+      '<a href="#about" class="nav-item">[ about ]</a>' +
+      '<a href="https://www.upwork.com/freelancers/sherylabs" target="_blank" rel="noopener noreferrer" class="nav-item">[ upwork ]</a>' +
+      '<a href="https://github.com/sheharyarr-ahmed" target="_blank" rel="noopener noreferrer" class="nav-item">[ github ]</a>' +
+      '<a href="https://www.linkedin.com/in/sheharyar-ahmed-89598b226/" target="_blank" rel="noopener noreferrer" class="nav-item">[ linkedin ]</a>'
+    );
+  }
+
+  function aboutNavHTML() {
+    return '<a href="#home" class="nav-item">[ home ]</a>';
+  }
+
+  var root = document.getElementById('root');
+  var view = document.getElementById('view');
+  var nav = document.getElementById('nav');
+  var viewWrap = document.getElementById('viewWrap');
+  var navWrap = document.getElementById('navWrap');
+
+  var reducedMotion =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var rafId = 0;
+
+  function applyReveal(p) {
+    var brightness = p * p;
+    root.style.filter = 'brightness(' + brightness + ')';
+    root.style.opacity = (0.02 + 0.98 * p).toString();
+
+    var headPct = p * (100 + FEATHER);
+    var tailPct = Math.max(0, headPct - FEATHER);
+    var mask =
+      'linear-gradient(to bottom, #000 0%, #000 ' + tailPct + '%, ' +
+      'rgba(0,0,0,0) ' + headPct + '%, rgba(0,0,0,0) 100%)';
+
+    viewWrap.style.webkitMaskImage = mask;
+    viewWrap.style.maskImage = mask;
+    viewWrap.style.webkitMaskRepeat = 'no-repeat';
+    viewWrap.style.maskRepeat = 'no-repeat';
+    viewWrap.style.webkitMaskSize = '100% 100%';
+    viewWrap.style.maskSize = '100% 100%';
+
+    navWrap.style.webkitMaskImage = mask;
+    navWrap.style.maskImage = mask;
+    navWrap.style.webkitMaskRepeat = 'no-repeat';
+    navWrap.style.maskRepeat = 'no-repeat';
+    navWrap.style.webkitMaskSize = '100% 100%';
+    navWrap.style.maskSize = '100% 100%';
+  }
+
+  function startReveal() {
+    cancelAnimationFrame(rafId);
+
+    if (reducedMotion) {
+      root.style.filter = 'none';
+      root.style.opacity = '1';
+      viewWrap.style.maskImage = '';
+      viewWrap.style.webkitMaskImage = '';
+      navWrap.style.maskImage = '';
+      navWrap.style.webkitMaskImage = '';
+      return;
+    }
+
+    applyReveal(0);
+    var startT = performance.now();
+    function tick(now) {
+      var t = Math.min(1, (now - startT) / REVEAL_MS);
+      applyReveal(slowEmerge(t));
+      if (t < 1) rafId = requestAnimationFrame(tick);
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function render() {
+    var route = (window.location.hash.replace(/^#/, '') || 'home');
+    if (route !== 'about' && route !== 'home') route = 'home';
+
+    root.classList.remove('route-home', 'route-about');
+    root.classList.add('route-' + route);
+
+    if (route === 'about') {
+      view.className = 'about-main';
+      view.innerHTML = aboutHTML();
+      nav.innerHTML = aboutNavHTML();
+    } else {
+      view.className = 'hero-main';
+      view.innerHTML = homeHTML();
+      nav.innerHTML = homeNavHTML();
+    }
+
+    window.scrollTo(0, 0);
+    startReveal();
+  }
+
+  window.addEventListener('hashchange', render);
+  render();
+})();
+</script>
+</body>
+</html>
