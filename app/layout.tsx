@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import Nav from "@/components/Nav";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -23,7 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jetbrainsMono.variable} h-full`}>
-      <body className="h-full">{children}</body>
+      <body className="h-full">
+        {children}
+        <Nav />
+      </body>
     </html>
   );
 }
