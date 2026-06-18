@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens (carried over verbatim from index.html) ---------- */
+:root {
+  --bg: #0a0a0a;
+  --fg-bright: #e4e4e7;
+  --fg-body: #3f3f47;
+  --fg-hover: #71717a;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg-bright: var(--fg-bright);
+  --color-fg-body: var(--fg-body);
+  --color-fg-hover: var(--fg-hover);
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg-body);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+/* ---------- Slow-emerge reveal wrapper ---------- */
+.reveal-root {
+  height: 100%;
+  /* starts in near-darkness; JS animates to full, reduced-motion overrides below */
+  opacity: 0.02;
+}
+
+/* ---------- Home / hero ---------- */
+.hero-main {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 0 6vw;
+  padding-bottom: 14vh;
+}
+
+.hero-block {
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+  color: var(--fg-body);
+  font-size: 12px;
+}
+
+.hero-block .line {
+  margin: 0 0 0.9em 0;
+  font-size: 14px;
+  line-height: 1.55;
+  text-wrap: pretty;
+  color: var(--fg-body);
+}
+.hero-block .line:last-child {
+  margin-bottom: 0;
+}
+
+.hero-block .name {
+  color: var(--fg-bright);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.hero-block .mono-accent {
+  color: var(--fg-body);
+  transition: color 160ms ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.hero-block .mono-accent:hover {
+  color: var(--fg-hover);
+}
+
+.hero-block .link {
+  color: var(--fg-bright);
+  text-decoration: none;
+  font-style: italic;
+  transition: color 160ms ease;
+}
+.hero-block .link:hover {
+  color: var(--fg-hover);
+}
+
+@media (max-width: 640px) {
+  .hero-block .line {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-root {
+    opacity: 1 !important;
+    filter: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+}
