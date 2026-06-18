@@ -40,8 +40,43 @@ body {
 /* ---------- Slow-emerge reveal wrapper ---------- */
 .reveal-root {
   height: 100%;
-  /* starts in near-darkness; JS animates to full, reduced-motion overrides below */
-  opacity: 0.02;
+  /* default visible (SSR / non-first-load); on the session's first load Reveal
+     hides it in a layout effect before paint, then animates the emerge. */
+  opacity: 1;
+}
+
+/* ---------- First-load loader ---------- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+}
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9em;
+}
+.loader-pct {
+  color: var(--fg-bright);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.loader-bar {
+  width: 180px;
+  height: 1px;
+  background: var(--fg-body);
+  overflow: hidden;
+}
+.loader-bar-fill {
+  height: 100%;
+  background: var(--fg-bright);
+  transition: width 90ms linear;
 }
 
 /* ---------- Home / hero ---------- */

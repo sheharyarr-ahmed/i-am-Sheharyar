@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
+import Loader from "@/components/Loader";
+import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -25,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jetbrainsMono.variable} h-full`}>
       <body className="h-full">
-        {children}
+        <Loader />
+        <PageTransition>{children}</PageTransition>
         <Nav />
       </body>
     </html>

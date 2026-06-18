@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 const REVEAL_MS = 4500;
@@ -14,12 +14,14 @@ function slowEmerge(t: number): number {
 
 /**
  * Ports the 4.5s brightness + mask "slow-emerge" reveal from the original
- * index.html. Runs once on mount. Respects prefers-reduced-motion (instant).
+ * index.html. Plays once, on the session's first load, after the Loader hands off
+ * (the "loader:done" event). On later same-session navigations it shows content
+ * immediately (PageTransition handles those). Respects prefers-reduced-motion.
  */
 export default function Reveal({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
@@ -27,11 +29,10 @@ export default function Reveal({ children }: { children: ReactNode }) {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (reduced) {
-      el.style.filter = "none";
+    // Not the session's first load (or reduced motion) → show immediately.
+    const firstLoad = sessionStorage.getItem("loaderShown") !== "1";
+    if (reduced || !firstLoad) {
       el.style.opacity = "1";
-      el.style.maskImage = "";
-      el.style.webkitMaskImage = "";
       return;
     }
 
@@ -55,17 +56,25 @@ export default function Reveal({ children }: { children: ReactNode }) {
       el.style.maskSize = "100% 100%";
     };
 
+    // Hide before paint, then animate once the loader finishes.
     apply(0);
-    const startT = performance.now();
 
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - startT) / REVEAL_MS);
-      apply(slowEmerge(t));
-      if (t < 1) rafId = requestAnimationFrame(tick);
+    const run = () => {
+      const startT = performance.now();
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - startT) / REVEAL_MS);
+        apply(slowEmerge(t));
+        if (t < 1) rafId = requestAnimationFrame(tick);
+      };
+      rafId = requestAnimationFrame(tick);
     };
-    rafId = requestAnimationFrame(tick);
 
-    return () => cancelAnimationFrame(rafId);
+    window.addEventListener("loader:done", run, { once: true });
+
+    return () => {
+      window.removeEventListener("loader:done", run);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
