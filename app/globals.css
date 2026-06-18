@@ -172,12 +172,68 @@ body {
   font-weight: 600;
 }
 
+/* ---------- Services / list pages ---------- */
+.list-intro {
+  margin-bottom: 1.6em;
+}
+.list-intro .list-heading {
+  color: var(--fg-bright);
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0 0 0.45em 0;
+  line-height: 1.3;
+}
+.list-intro .list-sub {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fg-body);
+  text-wrap: pretty;
+}
+
+.list-item {
+  padding: 0.9em 0;
+  border-top: 1px solid var(--fg-body);
+}
+.list-item:last-child {
+  border-bottom: 1px solid var(--fg-body);
+}
+.list-item .item-title {
+  color: var(--fg-bright);
+  font-weight: 500;
+  font-size: 12px;
+  margin: 0 0 0.3em 0;
+  line-height: 1.3;
+}
+.list-item .item-desc {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fg-body);
+  text-wrap: pretty;
+}
+.list-item .item-link {
+  color: var(--fg-bright);
+  text-decoration: none;
+  font-style: italic;
+  transition: color 160ms ease;
+}
+.list-item .item-link:hover {
+  color: var(--fg-hover);
+}
+
 @media (max-width: 640px) {
   .hero-block .line {
     font-size: 11px;
   }
   .about-block .para,
   .about-block .section-title {
+    font-size: 11px;
+  }
+  .list-intro .list-heading,
+  .list-intro .list-sub,
+  .list-item .item-title,
+  .list-item .item-desc {
     font-size: 11px;
   }
   .hero-nav {
