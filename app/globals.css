@@ -222,6 +222,117 @@ body {
   color: var(--fg-hover);
 }
 
+/* ---------- Contact form ---------- */
+.contact-form {
+  margin-top: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+}
+
+.field-label {
+  display: block;
+  font-size: 11px;
+  color: var(--fg-body);
+  margin-bottom: 0.4em;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.field-input,
+.field-textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--fg-body);
+  color: var(--fg-bright);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 0.6em 0.7em;
+  outline: none;
+  transition: border-color 160ms ease;
+}
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: var(--fg-body);
+}
+.field-input:focus,
+.field-textarea:focus {
+  border-color: var(--fg-hover);
+}
+.field-textarea {
+  resize: vertical;
+  min-height: 5.5em;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.chip {
+  background: transparent;
+  border: 1px solid var(--fg-body);
+  color: var(--fg-body);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease;
+}
+.chip:hover {
+  color: var(--fg-hover);
+  border-color: var(--fg-hover);
+}
+.chip[aria-pressed="true"] {
+  color: var(--fg-bright);
+  border-color: var(--fg-bright);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submit-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--fg-bright);
+  color: var(--fg-bright);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 0.55em 1.4em;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    opacity 160ms ease;
+}
+.submit-btn:hover:not(:disabled) {
+  color: var(--fg-hover);
+  border-color: var(--fg-hover);
+}
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.field-error {
+  font-size: 11px;
+  color: var(--fg-hover);
+  margin-top: 0.4em;
+}
+.form-status {
+  font-size: 12px;
+  color: var(--fg-bright);
+  margin-top: 0.2em;
+}
+
 @media (max-width: 640px) {
   .hero-block .line {
     font-size: 11px;
