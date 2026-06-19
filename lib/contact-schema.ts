@@ -1,10 +1,15 @@
 import { z } from "zod";
 
-export const BUDGET_TIERS = ["<$2k", "$2k–$5k", "$5k–$10k", "$10k+"] as const;
+export const BUDGET_TIERS = [
+  "<$2k",
+  "$2k to $5k",
+  "$5k to $10k",
+  "$10k+",
+] as const;
 
 export const INTEREST_OPTIONS = [
   "Agentic AI",
-  "Full-Stack Product",
+  "Full-Stack Web",
   "Native iOS",
   "Marketing Engineering",
   "Not sure yet",

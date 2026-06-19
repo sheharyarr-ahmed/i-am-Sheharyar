@@ -1,21 +1,19 @@
-// TODO(content): owner to confirm/replace service line-items below.
-// Seeded from the CLAUDE.md stack (agentic AI, full-stack, native iOS, marketing eng).
 const SERVICES = [
   {
-    title: "Agentic AI Systems",
-    desc: "Autonomous agents and LLM pipelines that execute work end-to-end — built on Claude, LangGraph, and typed tool interfaces.",
+    title: "Agentic AI systems",
+    desc: "Autonomous agents that reason, plan, and execute. Built on LangGraph, the Claude API, and MCP, with tool-use validation, bounded retry, and full per-node observability. Not chatbots.",
   },
   {
-    title: "Full-Stack Products",
-    desc: "Production web apps on the MERN and Next.js App Router stack — server actions, typed data layers, shipped to Vercel.",
+    title: "Modern full-stack web",
+    desc: "Production SaaS, MVPs, and internal platforms on Next.js, React, and strict TypeScript, with Supabase and Drizzle. From zero to launch, shipped in the open.",
   },
   {
-    title: "Native iOS",
-    desc: "Native Swift / SwiftUI applications for iPhone and iPad — Apple-platform craft, no cross-platform shortcuts.",
+    title: "Native iOS engineering",
+    desc: "Native Swift and SwiftUI for iPhone and iPad. SwiftData, ActivityKit, and Core ML. iOS only, never React Native or Flutter.",
   },
   {
-    title: "Marketing Engineering",
-    desc: "Technical marketing systems — landing pages, analytics, and conversion infrastructure that compounds over time.",
+    title: "Marketing engineering",
+    desc: "Programmatic SEO, automated content pipelines, and programmatic video production. Growth infrastructure that keeps running after you log off.",
   },
 ];
 
@@ -27,7 +25,7 @@ export default function Services() {
           <h1 className="list-heading">what i build.</h1>
           <p className="list-sub">
             Solo-architect engagements for founders who have outgrown traditional
-            SaaS — systems that execute work rather than display it.
+            SaaS. Systems that execute work rather than display it.
           </p>
         </div>
 

@@ -9,7 +9,7 @@ export default function Home() {
             i am <span className="name">SHEHARYAR AHMED</span>.
           </p>
           <p className="line">
-            i build systems that execute work — autonomous agents, full-stack
+            i build systems that execute work: autonomous agents, full-stack
             products, and native iOS.
           </p>
           <p className="line">
@@ -35,8 +35,8 @@ export default function Home() {
           </p>
           <p className="line">
             reach out at{" "}
-            <a href="mailto:sheryahmedme1@gmail.com" className="mono-accent">
-              sheryahmedme1@gmail.com
+            <a href="mailto:ping@sherylabs.tech" className="mono-accent">
+              ping@sherylabs.tech
             </a>
             ; i like hearing from people building things that matter.
           </p>

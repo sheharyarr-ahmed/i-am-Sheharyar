@@ -39,7 +39,7 @@ export async function submitContact(
     return {
       ok: false,
       error:
-        "Email isn't wired up yet — reach me directly at sheryahmedme1@gmail.com.",
+        "Email isn't wired up yet. Reach me directly at ping@sherylabs.tech.",
     };
   }
 

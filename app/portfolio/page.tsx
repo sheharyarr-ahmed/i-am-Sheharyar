@@ -1,7 +1,21 @@
-// TODO(content): owner supplies the curated repo list (anti-fabrication: only real
-// repos that exist on GitHub). Each entry renders as a row below the intro.
-// Shape: { name: string; desc: string; url: string }
-const PROJECTS: { name: string; desc: string; url: string }[] = [];
+// Real, shipped, public work. Anti-fabrication: only repos that exist on GitHub.
+const PROJECTS: { name: string; desc: string; url: string }[] = [
+  {
+    name: "ReelMind",
+    desc: "Agentic video production pipeline. A 7 node LangGraph.js state machine with conditional retry edges, Claude Haiku and Opus, Zod tool-use validation, and Remotion rendering across three aspect ratios. Next.js, React, Supabase, Drizzle.",
+    url: "https://github.com/sheharyarr-ahmed/reelmind",
+  },
+  {
+    name: "AuditDoc",
+    desc: "AI compliance document evaluator. Next.js and FastAPI with Claude, mandatory page-citation enforcement, PyMuPDF extraction, and verified government-data citations with SHA-256 checks.",
+    url: "https://github.com/sheharyarr-ahmed/auditdoc-app",
+  },
+  {
+    name: "FocusFrame",
+    desc: "Native iOS focus app. Swift 6, SwiftUI, SwiftData, ActivityKit Live Activities, Swift Charts, and Claude-coached reflections, on a strict five-layer architecture.",
+    url: "https://github.com/sheharyarr-ahmed/focusframe",
+  },
+];
 
 export default function Portfolio() {
   return (
@@ -10,15 +24,15 @@ export default function Portfolio() {
         <div className="list-intro">
           <h1 className="list-heading">selected work.</h1>
           <p className="list-sub">
-            I ship most of what I build in the open. The curated work lives on
-            GitHub —{" "}
+            I ship most of what I build in the open. Source and architecture both,
+            so the work speaks before I do. The full profile lives on{" "}
             <a
               href="https://github.com/sheharyarr-ahmed"
               target="_blank"
               rel="noopener noreferrer"
               className="item-link"
             >
-              github.com/sheharyarr-ahmed
+              GitHub
             </a>
             .
           </p>

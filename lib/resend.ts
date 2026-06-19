@@ -7,7 +7,7 @@ export const resend = process.env.RESEND_API_KEY
   : null;
 
 export const CONTACT_TO_EMAIL =
-  process.env.CONTACT_TO_EMAIL ?? "sheryahmedme1@gmail.com";
+  process.env.CONTACT_TO_EMAIL ?? "ping@sherylabs.tech";
 
 // Resend's onboarding sender works without a verified domain.
 export const CONTACT_FROM_EMAIL =

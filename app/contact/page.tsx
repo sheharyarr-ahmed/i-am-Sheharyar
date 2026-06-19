@@ -8,8 +8,17 @@ export default function Contact() {
           <h1 className="list-heading">let&apos;s talk.</h1>
           <p className="list-sub">
             Building something that matters? Reach me directly at{" "}
-            <a href="mailto:sheryahmedme1@gmail.com" className="item-link">
-              sheryahmedme1@gmail.com
+            <a href="mailto:ping@sherylabs.tech" className="item-link">
+              ping@sherylabs.tech
+            </a>
+            , book a call on{" "}
+            <a
+              href="https://cal.com/sheharyar-ahmed"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="item-link"
+            >
+              Cal.com
             </a>
             , or request a quote below.
           </p>

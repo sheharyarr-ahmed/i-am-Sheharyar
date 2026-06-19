@@ -49,7 +49,7 @@ Copy `.env.example` to `.env.local` and set:
 
 - `RESEND_API_KEY` — Resend API key (contact form email). Unset → the form shows a
   graceful error instead of crashing.
-- `CONTACT_TO_EMAIL` — destination inbox (default `sheryahmedme1@gmail.com`).
+- `CONTACT_TO_EMAIL` — destination inbox (default `ping@sherylabs.tech`).
 - `CONTACT_FROM_EMAIL` — verified Resend sender (default `onboarding@resend.dev`
   until a domain is verified).
 
@@ -57,5 +57,6 @@ Copy `.env.example` to `.env.local` and set:
 
 - GitHub: [sheharyarr-ahmed](https://github.com/sheharyarr-ahmed)
 - LinkedIn: [sheharyar-ahmed](https://www.linkedin.com/in/sheharyar-ahmed-89598b226/)
-- Upwork: [sherylabs](https://www.upwork.com/freelancers/sherylabs)
-- Email: sheryahmedme1@gmail.com
+- Upwork: [profile](https://www.upwork.com/freelancers/~01b873b895635d79b6)
+- Booking: [cal.com/sheharyar-ahmed](https://cal.com/sheharyar-ahmed)
+- Email: ping@sherylabs.tech

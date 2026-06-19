@@ -12,7 +12,10 @@ const INTERNAL = [
 ];
 
 const EXTERNAL = [
-  { href: "https://www.upwork.com/freelancers/sherylabs", label: "upwork" },
+  {
+    href: "https://www.upwork.com/freelancers/~01b873b895635d79b6",
+    label: "upwork",
+  },
   { href: "https://github.com/sheharyarr-ahmed", label: "github" },
   {
     href: "https://www.linkedin.com/in/sheharyar-ahmed-89598b226/",
