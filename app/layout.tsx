@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://sheharyar-ahmed.vercel.app";
+const SITE_URL = "https://sheharyarr.dev";
 const DESCRIPTION =
   "I build systems that execute work: autonomous agents, full-stack products, and native iOS.";
 
