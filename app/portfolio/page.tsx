@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Portfolio",
+  description:
+    "Selected shipped work, built in the open: ReelMind, AuditDoc, FocusFrame.",
+};
+
 // Real, shipped, public work. Anti-fabrication: only repos that exist on GitHub.
 const PROJECTS: { name: string; desc: string; url: string }[] = [
   {

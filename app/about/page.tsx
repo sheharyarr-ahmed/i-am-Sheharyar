@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Founder of SheryLabs. Solo-architect engagements across agentic AI, modern full-stack, and native iOS.",
+};
+
 export default function About() {
   return (
     <main className="about-main">

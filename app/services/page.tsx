@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Agentic AI systems, modern full-stack web, native iOS, and marketing engineering.",
+};
+
 const SERVICES = [
   {
     title: "Agentic AI systems",
