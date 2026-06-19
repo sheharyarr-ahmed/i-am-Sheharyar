@@ -7,7 +7,16 @@ export default function Contact() {
         <div className="list-intro">
           <h1 className="list-heading">let&apos;s talk.</h1>
           <p className="list-sub">
-            Building something that matters? Reach me directly at{" "}
+            Building something that matters? See what we build at{" "}
+            <a
+              href="https://sherylabs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="item-link"
+            >
+              sherylabs.com
+            </a>
+            . Reach me directly at{" "}
             <a href="mailto:ping@sherylabs.tech" className="item-link">
               ping@sherylabs.tech
             </a>

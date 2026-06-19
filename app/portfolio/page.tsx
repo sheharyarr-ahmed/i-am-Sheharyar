@@ -39,7 +39,7 @@ export default function Portfolio() {
         </div>
 
         {PROJECTS.map((p) => (
-          <div key={p.url} className="list-item">
+          <div key={p.url} className="list-entry">
             <h2 className="item-title">
               <a
                 href={p.url}

@@ -4,10 +4,18 @@ export default function About() {
       <div className="about-block">
         <h2 className="section-title">Now</h2>
         <p className="para">
-          Founding <span className="bold">SheryLabs</span>, a small studio for
-          founders who have outgrown traditional SaaS. Most of what I do there is
-          solo-architect engagements across agentic AI, modern full-stack, and
-          native iOS.
+          Founding{" "}
+          <a
+            href="https://sherylabs.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bold"
+          >
+            SheryLabs
+          </a>
+          , a small studio for founders who have outgrown traditional SaaS. Most
+          of what I do there is solo-architect engagements across agentic AI,
+          modern full-stack, and native iOS.
         </p>
         <p className="para">
           Completing an <span className="bold">MS in Software Engineering</span> @

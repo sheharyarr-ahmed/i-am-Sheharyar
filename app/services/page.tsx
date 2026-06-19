@@ -30,7 +30,7 @@ export default function Services() {
         </div>
 
         {SERVICES.map((s) => (
-          <div key={s.title} className="list-item">
+          <div key={s.title} className="list-entry">
             <h2 className="item-title">{s.title}</h2>
             <p className="item-desc">{s.desc}</p>
           </div>
