@@ -1,42 +1,62 @@
 # i-am-Sheharyar
 
-Personal portfolio for **Sheharyar Ahmed** — a minimal, single-file static site.
+Personal portfolio for **Sheharyar Ahmed** — a minimal, monochrome multi-route site.
 
 ## About
 
-A dark, typographic portfolio built with plain HTML, CSS, and vanilla JavaScript. No frameworks, no build step, no dependencies.
+A dark, typographic portfolio: pure-black background, JetBrains Mono, a muted-gray
+palette, a first-load progress-bar loader, and a slow-emerge reveal on the home route.
+No accent colors, gradients, badges, or photos.
 
 **Stack**
-- Single `index.html` — everything lives in one file
-- JetBrains Mono (Google Fonts)
-- Hash-based client-side routing (`#home` / `#about`)
-- Animated slow-emerge reveal (4.5s brightness + mask animation)
-- Respects `prefers-reduced-motion`
 
-## Pages
+- Next.js (App Router) + TypeScript
+- Tailwind v4 (design tokens encode the palette)
+- Motion — first-load loader + route transitions
+- Resend + a Server Action for the contact form
+- JetBrains Mono via `next/font`
+- pnpm
 
-| Route | Content |
-|-------|---------|
-| `#home` | Name, tagline, GitHub, LinkedIn, email |
-| `#about` | Now, Interests, Background |
+## Routes
 
-## Run locally
+| Route        | Content                                                      |
+| ------------ | ----------------------------------------------------------- |
+| `/`          | Name, tagline, GitHub/LinkedIn/email — with the slow-emerge |
+| `/services`  | Monochrome list of service line-items                       |
+| `/portfolio` | Intro + curated GitHub repo links                           |
+| `/about`     | Now / Interests / Background                                 |
+| `/contact`   | Email, interest chips, budget tiers, Request-a-Quote form   |
 
-No build step needed — just open the file:
-
-```bash
-open index.html
-```
-
-Or serve it locally:
+## Develop
 
 ```bash
-npx serve .
+pnpm install
+pnpm dev          # http://localhost:3000
 ```
+
+## Verify
+
+```bash
+pnpm typecheck    # tsc --noEmit
+pnpm lint         # eslint
+pnpm build        # production build (all 5 routes)
+pnpm start        # serve the production build
+```
+
+## Environment
+
+Copy `.env.example` to `.env.local` and set:
+
+- `RESEND_API_KEY` — Resend API key (contact form email). Unset → the form shows a
+  graceful error instead of crashing.
+- `CONTACT_TO_EMAIL` — destination inbox (default `ping@sherylabs.tech`).
+- `CONTACT_FROM_EMAIL` — verified Resend sender (default `onboarding@resend.dev`
+  until a domain is verified).
 
 ## Links
 
 - GitHub: [sheharyarr-ahmed](https://github.com/sheharyarr-ahmed)
 - LinkedIn: [sheharyar-ahmed](https://www.linkedin.com/in/sheharyar-ahmed-89598b226/)
-- Upwork: [sherylabs](https://www.upwork.com/freelancers/sherylabs)
-- Email: sheryahmedme1@gmail.com
+- Upwork: [profile](https://www.upwork.com/freelancers/~01b873b895635d79b6)
+- Booking: [cal.com/sheharyar-ahmed](https://cal.com/sheharyar-ahmed)
+- Email: ping@sherylabs.tech

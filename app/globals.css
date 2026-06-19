@@ -1,0 +1,437 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens (carried over verbatim from index.html) ---------- */
+:root {
+  --bg: #000000;
+  --fg-bright: #e4e4e7;
+  --fg-body: #3f3f47;
+  --fg-hover: #71717a;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg-bright: var(--fg-bright);
+  --color-fg-body: var(--fg-body);
+  --color-fg-hover: var(--fg-hover);
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg-body);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+/* ---------- Slow-emerge reveal wrapper ---------- */
+.reveal-root {
+  height: 100%;
+  /* default visible (SSR / non-first-load); on the session's first load Reveal
+     hides it in a layout effect before paint, then animates the emerge. */
+  opacity: 1;
+}
+
+/* ---------- First-load loader ---------- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+}
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9em;
+}
+.loader-pct {
+  color: var(--fg-bright);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.loader-bar {
+  width: 180px;
+  height: 1px;
+  background: var(--fg-body);
+  overflow: hidden;
+}
+.loader-bar-fill {
+  height: 100%;
+  background: var(--fg-bright);
+  transition: width 90ms linear;
+}
+
+/* ---------- Home / hero ---------- */
+.hero-main {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 0 6vw;
+  padding-bottom: 14vh;
+}
+
+.hero-block {
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+  color: var(--fg-body);
+  font-size: 12px;
+}
+
+.hero-block .line {
+  margin: 0 0 0.9em 0;
+  font-size: 14px;
+  line-height: 1.55;
+  text-wrap: pretty;
+  color: var(--fg-body);
+}
+.hero-block .line:last-child {
+  margin-bottom: 0;
+}
+
+.hero-block .name {
+  color: var(--fg-bright);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.hero-block .mono-accent {
+  color: var(--fg-body);
+  transition: color 160ms ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.hero-block .mono-accent:hover {
+  color: var(--fg-hover);
+}
+
+.hero-block .link {
+  color: var(--fg-body);
+  text-decoration: none;
+  font-style: italic;
+  transition: color 160ms ease;
+}
+.hero-block .link:hover {
+  color: var(--fg-hover);
+}
+
+/* ---------- Bottom nav ---------- */
+.nav-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 16vh;
+  padding-bottom: 7vh;
+  /* fade-to-black scrim: scrolling content dissolves into the bg before it
+     reaches the floating nav (pure-black, no glass). Invisible where nothing
+     scrolls behind it (home/about). */
+  background: linear-gradient(
+    to top,
+    var(--bg) 0%,
+    var(--bg) 50%,
+    transparent 100%
+  );
+  /* let the empty fade area pass clicks through to the content behind it */
+  pointer-events: none;
+}
+
+.hero-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.3em;
+  flex-wrap: wrap;
+  padding: 0 6vw;
+  font-size: 12px;
+  color: var(--fg-body);
+  /* re-enable interaction on the nav itself */
+  pointer-events: auto;
+}
+
+.nav-item {
+  color: var(--fg-body);
+  text-decoration: none;
+  transition: color 160ms ease;
+  letter-spacing: 0.01em;
+}
+.nav-item:hover {
+  color: var(--fg-hover);
+}
+
+/* ---------- About ---------- */
+.about-main {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  padding: 14vh 6vw;
+  display: grid;
+  place-items: center;
+}
+
+.about-block {
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+  counter-reset: entry;
+}
+
+.about-block .section-title {
+  color: var(--fg-bright);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0;
+  margin: 1.3em 0 0.45em 0;
+  line-height: 1.3;
+}
+.about-block .section-title:first-child {
+  margin-top: 0;
+}
+
+.about-block .para {
+  margin: 0 0 0.5em 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fg-body);
+  text-wrap: pretty;
+}
+
+.about-block .bold {
+  color: var(--fg-body);
+  font-weight: 600;
+}
+/* SheryLabs link in the About copy: bold emphasis that highlights on hover */
+a.bold {
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+a.bold:hover {
+  color: var(--fg-hover);
+}
+
+/* ---------- Services / list pages ---------- */
+.list-intro {
+  margin-bottom: 1.6em;
+}
+.list-intro .list-heading {
+  color: var(--fg-bright);
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0 0 0.45em 0;
+  line-height: 1.3;
+}
+.list-intro .list-sub {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fg-body);
+  text-wrap: pretty;
+}
+
+/* NB: avoid the class name "list-item" — it collides with Tailwind's
+   display:list-item utility and renders a stray disc bullet. */
+.list-entry {
+  counter-increment: entry;
+  padding: 0.7em 0;
+}
+.list-entry .item-title {
+  position: relative;
+  color: var(--fg-bright);
+  font-weight: 500;
+  font-size: 12px;
+  margin: 0 0 0.3em 0;
+  padding-left: 2.4em;
+  line-height: 1.3;
+}
+.list-entry .item-title::before {
+  content: counter(entry, decimal-leading-zero); /* 01, 02, 03 … */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--fg-hover);
+  font-weight: 400;
+}
+.list-entry .item-desc {
+  margin: 0;
+  padding-left: 2.4em;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fg-body);
+  text-wrap: pretty;
+}
+.item-link {
+  color: var(--fg-body);
+  text-decoration: none;
+  font-style: italic;
+  transition: color 160ms ease;
+}
+.item-link:hover {
+  color: var(--fg-hover);
+}
+
+/* ---------- Contact form ---------- */
+.contact-form {
+  margin-top: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+  /* clearance so the submit button scrolls above the fade scrim + floating nav */
+  padding-bottom: 12vh;
+}
+
+.field-label {
+  display: block;
+  font-size: 11px;
+  color: var(--fg-body);
+  margin-bottom: 0.4em;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.field-input,
+.field-textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--fg-body);
+  color: var(--fg-bright);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 0.6em 0.7em;
+  outline: none;
+  transition: border-color 160ms ease;
+}
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: var(--fg-body);
+}
+.field-input:focus,
+.field-textarea:focus {
+  border-color: var(--fg-hover);
+}
+.field-textarea {
+  resize: vertical;
+  min-height: 5.5em;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.chip {
+  background: transparent;
+  border: 1px solid var(--fg-body);
+  color: var(--fg-body);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease;
+}
+.chip:hover {
+  color: var(--fg-hover);
+  border-color: var(--fg-hover);
+}
+.chip[aria-pressed="true"] {
+  color: var(--fg-bright);
+  border-color: var(--fg-bright);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submit-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--fg-bright);
+  color: var(--fg-bright);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 0.55em 1.4em;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    opacity 160ms ease;
+}
+.submit-btn:hover:not(:disabled) {
+  color: var(--fg-hover);
+  border-color: var(--fg-hover);
+}
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.field-error {
+  font-size: 11px;
+  color: var(--fg-hover);
+  margin-top: 0.4em;
+}
+.form-status {
+  font-size: 12px;
+  color: var(--fg-bright);
+  margin-top: 0.2em;
+}
+
+@media (max-width: 640px) {
+  .hero-block .line {
+    font-size: 11px;
+  }
+  .about-block .para,
+  .about-block .section-title {
+    font-size: 11px;
+  }
+  .list-intro .list-heading,
+  .list-intro .list-sub,
+  .list-entry .item-title,
+  .list-entry .item-desc {
+    font-size: 11px;
+  }
+  .hero-nav {
+    gap: 0.8em;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-root {
+    opacity: 1 !important;
+    filter: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+}
