@@ -436,6 +436,23 @@ a.bold:hover {
 }
 
 @media (max-width: 640px) {
+  /* iOS Safari treats 100vh as the *large* viewport (toolbar hidden), so
+     vertically-centered content gets pushed down behind the visible toolbar.
+     svh centers within the actually-visible area: lifts the hero up and trims
+     the empty space above it. Mobile only — desktop layout is unchanged. */
+  .hero-main {
+    min-height: 100svh;
+  }
+
+  /* Section pages: top-align the copy and give it bottom clearance so its tail
+     ends above the fixed bottom nav instead of centering down into it. */
+  .about-main {
+    min-height: 100svh;
+    align-items: start;
+    padding-top: 13vh;
+    padding-bottom: 24vh;
+  }
+
   .hero-block .line {
     font-size: 11px;
   }
