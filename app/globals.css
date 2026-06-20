@@ -444,12 +444,79 @@ a.bold:hover {
     min-height: 100svh;
   }
 
-  /* Section pages: top-align the copy and give it bottom clearance so its tail
-     ends above the fixed bottom nav instead of centering down into it. */
+  /* Section pages: instead of scrolling the whole page behind the fixed logo
+     and nav (which made the copy collide with both), the content scrolls inside
+     a fixed-height viewport. A vertical mask pinned to that viewport dissolves
+     the text into black near the logo (top) and the nav (bottom), so it fades
+     out before it can ever overlap the chrome. Body has no page overflow now,
+     so the iOS toolbar stays put (no svh jitter). */
   .about-main {
-    min-height: 100svh;
+    height: 100svh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     align-items: start;
-    padding-top: 13vh;
+    padding-top: 14vh;
+    padding-bottom: 24vh;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 10%,
+      #000 82%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 10%,
+      #000 82%,
+      transparent 100%
+    );
+  }
+
+  /* Contact is a form. It keeps the same self-contained internal scroll as the
+     reading pages (page-level scroll is unreliable here because html/body are
+     locked to height:100%), but drops the fade mask so no field dissolves while
+     it is being read or filled. Its top/bottom fades come from the scrims below
+     instead, and iOS scrolls this container to reveal a focused input. */
+  .about-main.page-scroll {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  /* Top fade scrim — mirror of the bottom nav scrim. Dissolves scrolling page
+     content into black under the logo (logo is z-index 4, stays above this).
+     Redundant-but-harmless over the masked reading pages and the empty home
+     hero; does the real work on the page-scrolled contact page. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 14vh;
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      var(--bg) 0%,
+      var(--bg) 30%,
+      transparent 100%
+    );
+  }
+
+  /* Strengthen the bottom nav scrim so page-scrolled content (contact) fully
+     fades out before the nav links instead of bleeding through. */
+  .nav-wrap {
+    min-height: 22vh;
+    background: linear-gradient(
+      to top,
+      var(--bg) 0%,
+      var(--bg) 60%,
+      transparent 100%
+    );
+  }
+
+  /* Clear the taller scrim so the submit button isn't buried behind it. */
+  .contact-form {
     padding-bottom: 24vh;
   }
 

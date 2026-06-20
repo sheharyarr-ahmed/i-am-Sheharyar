@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <main className="about-main">
+    <main className="about-main page-scroll">
       <div className="about-block">
         <div className="list-intro">
           <h1 className="list-heading">let&apos;s talk.</h1>
