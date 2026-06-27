@@ -21,6 +21,7 @@ const EXTERNAL = [
     href: "https://www.linkedin.com/in/sheharyar-ahmed-89598b226/",
     label: "linkedin",
   },
+  { href: "https://x.com/real_sheharyar", label: "twitter" },
 ];
 
 export default function Nav() {
